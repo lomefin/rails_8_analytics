@@ -9,3 +9,5 @@ nav.navbar.navbar-expand-lg.bg-body-tertiary.mb-2
           = link_to 'Overview', sensors_path, class: 'nav-link'
         li.nav-item 
           = link_to 'Real time', sensors_path, class: 'nav-link'
+      .d-flex
+        = Current.user.email_address

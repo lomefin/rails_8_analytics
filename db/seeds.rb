@@ -1,3 +1,4 @@
+srand(8675)
 
 def mac_address
   6.times.map { "%02x" % rand(256) }.join(":")
@@ -19,6 +20,7 @@ companies = {
 companies.each do |name, config|
   puts "Creating company #{name}"
   company = Company.create(name:)
+  puts "  company created"
   puts "Building sensors"
   config => { conveyors:, sections:, sides: }
   conveyors.each do |conveyor|
@@ -34,7 +36,7 @@ companies.each do |name, config|
   end
 end
 
-puts "Created #{Sensor.count} sensors"
+puts "  #{Sensor.count} sensors created"
 
 puts "Building metrics"
 # Create metrics
@@ -57,4 +59,13 @@ Sensor.all.pluck(:code).each do |code|
     end
   end
 end
-puts "Created #{Metric.count} metrics"
+puts "  #{Metric.count} metrics created"
+
+puts "Bulding users"
+Company.all.each do |company|
+  5.times do |idx|
+    user = User.create email_address: "user#{idx + 1}@#{company.name}.com",
+                     password: "password"
+    puts "  user #{user.email_address} created"
+  end
+end

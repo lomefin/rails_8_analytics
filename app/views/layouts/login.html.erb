@@ -24,8 +24,7 @@
   </head>
 
   <body class="container-fluid bg-body-secondary">
-    <%= render(NavBarComponent.new) if authenticated? %>
-    <main class="card card-body" style="min-height: 75vh">
+    <main class="card card-body" style="min-height: 50vh; margin-top: 20vh;">
       <%= yield %>
     </main>
   </body>
