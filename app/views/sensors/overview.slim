@@ -1,0 +1,11 @@
+h1 Overview
+
+.row.row-cols-2
+  .col.p-1
+    = render(KPIComponent.new(title: 'Total sensors', value: @sensor_count))
+  .col.p-1 
+    = render(KPIComponent.new(title: 'Total metrics', value: @metrics_count))
+  .col.p-1 
+    = render(KPIComponent.new(title: 'Latest metric', value: @latest_metrics))
+  .col.p-1 
+    = render(KPIComponent.new(title: 'Average latency', value: @latency, unit: 'seconds'))

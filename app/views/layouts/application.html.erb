@@ -18,15 +18,19 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
+    <%= javascript_importmap_tags %>
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+    
   </head>
 
   <body class="container-fluid bg-body-secondary">
     <%= render(NavBarComponent.new) if authenticated? %>
-    <main class="card card-body" style="min-height: 75vh">
-      <%= yield %>
-    </main>
+    <div class="container">
+      <main class="card card-body" style="min-height: 75vh">
+        <%= yield %>
+      </main>
+    </div>
+    <div class="row text-center"><%= local_time(Time.current, type: 'time-or-date') %></div>
   </body>
 </html>

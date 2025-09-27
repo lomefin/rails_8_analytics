@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   resources :sensors, only: [ :index, :show ] do
     resources :metrics, only: :index
     get :real_time
+    collection do
+      get :overview
+    end
   end
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
@@ -21,5 +24,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  root 'sensors#index'
+  root 'sensors#overview'
 end

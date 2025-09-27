@@ -1,8 +1,8 @@
 class GenerateRandomMetricsJob < ApplicationJob
+
   queue_as :default
 
   def perform(*args)
-    # Do something later
     Sensor.all.each do |sensor|
       build_metrics(sensor)
     end
@@ -59,13 +59,14 @@ class GenerateRandomMetricsJob < ApplicationJob
   def build_metrics(sensor)
     time_limit = 5.minutes.from_now
     start = false
-    threads = %w[signal speed].map do |name|
+    threads = %i[pressure rpm].map do |name|
       Thread.new do
+        simulator = Services::SensorSimulatorFactory.get(kind: name)
         loop do
           next unless start
           break if Time.current > time_limit
 
-          sensor.metrics.create(name:, value: rand_normal_05)
+          sensor.metrics.create(name:, value: simulator.next_value)
           sleep next_event
         end
       end
@@ -73,4 +74,5 @@ class GenerateRandomMetricsJob < ApplicationJob
     start = true
     threads.join
   end
+
 end

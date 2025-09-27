@@ -61,6 +61,7 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
   gem "lookbook", ">= 2.3.13"
+  gem "rubocop-daemon"
 end
 
 group :test do
@@ -68,3 +69,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "local_time", "~> 3.0"

@@ -6,8 +6,8 @@ end
 
 companies = {
   'ACME' => {
-    conveyors: %w[1 2],
-    sections: %w[A B C],
+    conveyors: %w[1],
+    sections: %w[A],
     sides: [ 1, 2 ]
   },
   'DEMO' => {
@@ -40,32 +40,37 @@ puts "  #{Sensor.count} sensors created"
 
 puts "Building metrics"
 # Create metrics
-metric_kinds = %w[signal speed]
+metric_kinds = %i[pressure rpm]
 
-max_past_time = 27.hours
-
-Sensor.all.pluck(:code).each do |code|
-  metric_kinds.each do |metric_kind|
-    rand(150..225).times do
-      metric_timestamp = rand(0..max_past_time).seconds.ago
-
-      value = rand(0.0..100.0).round(2)
-      Metric.create!(
-        source: code,
-        name: metric_kind,
-        value:,
-        created_at: metric_timestamp,
-        updated_at: metric_timestamp)
-    end
+Sensor.all.each do |sensor|
+  metric_kinds.each do |kind|
+    simulator = Services::MetricsSimulator.new(sensor, kind)
+    simulator.simulate!
   end
 end
+# Sensor.all.pluck(:code).each do |code|
+#   metric_kinds.each do |metric_kind|
+#     rand(150..225).times do
+#       metric_timestamp = rand(0..max_past_time).seconds.ago
+
+#       value = rand(0.0..100.0).round(2)
+#       Metric.create!(
+#         source: code,
+#         name: metric_kind,
+#         value:,
+#         created_at: metric_timestamp,
+#         updated_at: metric_timestamp)
+#     end
+#   end
+# end
 puts "  #{Metric.count} metrics created"
 
 puts "Bulding users"
 Company.all.each do |company|
   5.times do |idx|
-    user = User.create email_address: "user#{idx + 1}@#{company.name}.com",
-                     password: "password"
+    user = User.create(email_address: "user#{idx + 1}@#{company.name}.com",
+                      password: "password", company:)
+
     puts "  user #{user.email_address} created"
   end
 end

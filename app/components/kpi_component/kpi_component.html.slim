@@ -1,0 +1,11 @@
+.card
+  .card-body[data-raw-value="#{@value}"]
+    h3 = title
+    p.display-4.text-center
+      
+      - if value_is_date?
+        = helpers.local_time(value, type: 'time-or-date')
+      - else
+        = value
+    
+    p.text-center = unit
