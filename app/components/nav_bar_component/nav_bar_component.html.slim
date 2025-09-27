@@ -8,10 +8,16 @@ nav.navbar.navbar-expand-lg.bg-body-tertiary.mb-2
         li.nav-item
           = link_to 'Overview', overview_sensors_path, class: 'nav-link'
         li.nav-item 
-          = link_to 'Real time', sensors_path, class: 'nav-link'
+          = link_to 'Real time', real_time_metrics_path, class: 'nav-link'
         li.nav-item
-          = link_to 'Historial', sensors_path, class: 'nav-link'
+          = link_to 'Historical', metrics_path, class: 'nav-link'
         li.nav-item
           = link_to 'Settings', sensors_path, class: 'nav-link'
       .d-flex
-        = Current.user.email_address
+        ul.navbar-nav
+          li.nav-item.dropdown
+            a.nav-link.dropdown-toggle href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+              = Current.user.email_address
+            ul.dropdown-menu
+              = link_to "Logout", logout_session_path, class: 'nav-link'
+            

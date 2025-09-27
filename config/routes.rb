@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resource :session
+  resource :session do
+    collection do
+      get :logout
+    end
+  end
   resources :passwords, param: :token
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -12,9 +16,17 @@ Rails.application.routes.draw do
 
   resources :sensors, only: [ :index, :show ] do
     resources :metrics, only: :index
-    get :real_time
+    member do
+      get :real_time
+    end
     collection do
       get :overview
+    end
+  end
+
+  resources :metrics, only: :index do
+    collection do
+      get :real_time
     end
   end
 

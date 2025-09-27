@@ -5,10 +5,10 @@ import "controllers"
 import "./channels"
 
 import LocalTime from "local-time"
-console.log('localtime')
+console.log('application')
 LocalTime.start()
 document.addEventListener("turbo:morph", () => {
   LocalTime.run()
 })
 
-import * as bootstrap from "bootstrap"
+// import * as bootstrap from "bootstrap"

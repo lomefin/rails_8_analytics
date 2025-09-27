@@ -71,3 +71,5 @@ group :test do
 end
 
 gem "local_time", "~> 3.0"
+
+gem "kaminari", "~> 1.2"

@@ -1,0 +1,47 @@
+h1 Metrics
+
+
+.offcanvas.offcanvas-end#historical-search[tabindex='-1' aria-labelledby="historical-search-label"]
+  .offcanvas-header
+    h5.offcanvas-title#historical-search-label Metrics filter
+    button.btn-close[type='button' data-bs-dismiss='offcanvas' aria-label='Close']
+  .offcanvas-body
+    = form_with(path: metrics_path, method: :get, class: 'form') do |f|
+      .mb-0
+        = f.label :source, class: 'form-label'
+      .mb-4
+        = f.select :source, @sources.map{ |p| [p, p] }, { include_blank: true, selected: params[:source] }, { class: 'form-select'}
+      .mb-0
+        = f.label :name, class: 'form-label'
+      .mb-4
+        = f.select :name, @dimensions.map{ |p| [p, p] }, { include_blank: true, selected: params[:name] }, { class: 'form-select'}
+      .mb-2.d-grid
+        = f.submit 'Filter', class: 'btn btn-primary'
+
+
+.row.justify-content-end
+  .col-4.text-end
+    = link_to 'Clear filters', metrics_path, class: 'btn btn-secondary me-2'
+    button.btn.btn-info[type='button' data-bs-toggle='offcanvas' data-bs-target='#historical-search']
+      | Filter
+
+
+table.table
+  thead
+    tr 
+      th[scope='col'] Source
+      th[scope='col'] Name
+      th[scope='col'] Value
+      th[scope='col'] Timestamp
+  tbody
+    - @all_metrics.each do |metric|
+      tr 
+        td = metric.source
+        td = metric.name
+        td = metric.value.to_d.round(4)
+        td = local_time(metric.created_at, type: 'time-or-date', 'data-format': '%Y-%e-%m %H:%M:%S')
+
+  tfoot
+    tr
+      th[colspan='4'] 
+        = paginate @all_metrics

@@ -4,7 +4,7 @@
     p.display-4.text-center
       
       - if value_is_date?
-        = helpers.local_time(value, type: 'time-or-date')
+        = helpers.local_time(value, type: 'time-or-date', 'data-format': '%e/%m %H:%M')
       - else
         = value
     
