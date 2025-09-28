@@ -65,3 +65,8 @@ Style/WordArray:
 Layout/EmptyLinesAroundClassBody:
   Enabled: true
   EnforcedStyle: empty_lines_except_namespace
+
+Layout/TrailingBlankLines:
+  Enabled: true
+  # Enforces exactly one blank line at the end of files
+  Max: 1
