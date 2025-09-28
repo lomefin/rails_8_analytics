@@ -41,7 +41,7 @@ class Metric < ApplicationRecord
   #
   # @return [Hash] hash containing value and name for broadcasting
   def broadcasteable_attributes
-    { value:, name: }
+    { value:, name:, ts: created_at.iso8601 }
   end
 
   # Broadcasts the metric data via ActionCable

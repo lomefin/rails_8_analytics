@@ -2,11 +2,12 @@
 
 class LineGraphComponent < ViewComponent::Base
 
-  def initialize(title:, values:, topics:, sensor: nil)
+  def initialize(title:, values:, topics:, sensor: nil, dimension:)
     @title = title
     @values = values
     @topics = topics
     @sensor = sensor
+    @dimension = dimension
   end
 
 
@@ -14,6 +15,12 @@ class LineGraphComponent < ViewComponent::Base
 
   def values = @values.to_json
 
+  def dimension = @dimension
+
   def id = @sensor ? helpers.dom_id(sensor) : SecureRandom.uuid
+
+  def topics
+    @topics.to_json
+  end
 
 end

@@ -3,4 +3,4 @@ h1 Real Time Metrics
 .row
   - @dimensions.each do |dimension|
     .col
-      = render(LineGraphComponent.new(title: dimension, values: @data[dimension], topics: @data[dimension].keys))
+      = render(LineGraphComponent.new(title: dimension, values: @data[dimension], topics: @data[dimension].keys, dimension:))
