@@ -1,8 +1,7 @@
 // src/controllers/line_graph_controller.js
 import { Controller } from "@hotwired/stimulus"
-import { Chart, LinearScale, PointElement, Tooltip, Legend, TimeScale } from "https://cdn.jsdelivr.net/npm/chart.js@4.5.0/+esm"
-import "https://cdn.jsdelivr.net/npm/luxon@^2"
-import "https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@^1"
+
+import "https://cdn.jsdelivr.net/npm/apexcharts"
 export default class extends Controller {
   static targets = ["container"]
   static values = {
@@ -14,45 +13,51 @@ export default class extends Controller {
     this.chart = null
   }
   connect() {
-    // this.containerTarget.textContent = "Hello World!"
     console.log('Data', this.dataValue)
     window.dataValue = this.dataValue
     this.datasets = Object.entries(this.dataValue).map(([sensor, points], idx) => ({
-      label: sensor,
-      data: points.map(([date, value]) => ({ x: date, y: value })),
-      borderColor: ["blue", "red", "green"][idx % 3],
-      fill: false,
-      tension: 0.1,
+      name: sensor,
+      data: points.map(([value, date]) => {
+
+        return { x: Date.parse(date), y: value }
+      }),
+
     }));
     window.datasets = this.datasets
-    // this.containerTarget.textContent = "Preparing rendering"
     this.buildChart()
   }
 
   buildChart() {
-    //const { Chart, TimeScale, LinearScale, PointElement, LineElement, Tooltip, Legend, Filler } = Chart;
-    //Chart.register(Chart.adapters._date = Chart._adapters._date || {});
-    //Chart.defaults.plugins.tooltip.mode = 'index';
-    Chart.register(LinearScale, PointElement, Tooltip, Legend, TimeScale);
-    window.chart = Chart
-    const datasets = this.datasets
-    this.chart = new Chart(this.containerTarget, {
-      type: "line",
-      data: { datasets },
-      options: {
-        responsive: true,
-        parsing: false, // because we already supply {x,y}
-        scales: {
-          x: {
-            type: "time"
-            // , time: { unit: "day" } 
-          },
-          y: { beginAtZero: true },
-          // xAxis: {
-          //   type: 'time'
-          // }
-        },
+    this.chart = new ApexCharts(this.containerTarget, this.defaultOptions())
+    this.chart.render()
+  }
+
+  defaultOptions() {
+    return {
+      chart: {
+        height: 380,
+        width: "100%",
+        type: "line",
+        animations: {
+          initialAnimation: {
+            enabled: false
+          }
+        }
       },
-    });
+      series: this.datasets,
+      xaxis: {
+        type: "datetime",
+        labels: { datetimeUTC: false }
+      },
+      yaxis: {
+        decimalsInFloat: 1
+      },
+      tooltip: {
+        x: {
+          show: true,
+          format: 'dd-MM-yyyy H:mm',
+        }
+      }
+    }
   }
 }
