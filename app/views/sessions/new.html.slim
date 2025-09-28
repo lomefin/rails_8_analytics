@@ -1,6 +1,6 @@
 .row.justify-content-center.align-items-center
   .col-6
-    = form_with url: session_path do |form|
+    = form_with url: session_path, data: { turbo: false }  do |form|
       .card
         .card-header Login
         .card-body
