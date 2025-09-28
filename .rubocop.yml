@@ -20,10 +20,6 @@ Layout/EmptyLinesAroundAccessModifier:
 Layout/EmptyLinesAroundBlockBody:
   Enabled: true
 
-  # In a regular class definition, no empty lines around the body.
-Layout/EmptyLinesAroundClassBody:
-  Enabled: true
-
 # In a regular method definition, no empty lines around the body.
 Layout/EmptyLinesAroundMethodBody:
   Enabled: true
@@ -66,7 +62,5 @@ Layout/EmptyLinesAroundClassBody:
   Enabled: true
   EnforcedStyle: empty_lines_except_namespace
 
-Layout/TrailingBlankLines:
+Layout/TrailingEmptyLines:
   Enabled: true
-  # Enforces exactly one blank line at the end of files
-  Max: 1

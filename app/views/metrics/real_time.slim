@@ -1,6 +1,13 @@
 h1 Real Time Metrics
 
 .row
+  h2 Observed values
   - @dimensions.each do |dimension|
     .col
       = render(LineGraphComponent.new(title: dimension, values: @data[dimension], topics: @data[dimension].keys, dimension:))
+
+.row
+  h2 Telemetries per minute
+  - @dimensions.each do |dimension|
+    .col
+      = render(BarGraphComponent.new(title: dimension, values: @data[dimension], topics: @data[dimension].keys, dimension:))

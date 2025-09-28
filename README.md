@@ -13,9 +13,11 @@ Diseña, implementa y deployed un dashboard de analítica con submenú y gráfic
   -[] Al menos 2 gráficos en tiempo real (línea y barras) con actualización push (WebSocket/SSE).
   -[X] Modelo de datos con tabla 'metrics' (id, source, metric, value, ts UTC).
   -[X] Proceso cron que inserta datos sintéticos cada 5–15s con posibilidad de picos.
-  -[] Endpoints REST para histórico y stream en tiempo real (SSE/WS).
-  -[] Filtros por rango de fechas, métricas y fuentes.
-  -[] Deploy en entorno público con cron activo.
+  -[X] Endpoints REST para histórico 
+  -[X] Endpoint  stream en tiempo real (SSE/WS).
+  -[X] Filtros métricas y fuentes.
+  -[] Filtros por rango de fechas,
+  -[X] Deploy en entorno público con cron activo.
   -[X] Calidad de código: linter, manejo de errores, pruebas mínimas.
 
 ### Entregables

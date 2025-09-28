@@ -1,4 +1,5 @@
 class CreateMetrics < ActiveRecord::Migration[8.0]
+
   def change
     create_table :metrics do |t|
       t.string :source, index: true
@@ -8,4 +9,5 @@ class CreateMetrics < ActiveRecord::Migration[8.0]
       t.timestamps
     end
   end
+
 end

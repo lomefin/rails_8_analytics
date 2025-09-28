@@ -1,4 +1,5 @@
 class CreateSensors < ActiveRecord::Migration[8.0]
+
   def change
     create_table :sensors do |t|
       t.string :name
@@ -10,4 +11,5 @@ class CreateSensors < ActiveRecord::Migration[8.0]
       t.timestamps
     end
   end
+
 end
