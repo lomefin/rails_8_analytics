@@ -1,0 +1,22 @@
+---
+format: html
+output: doc
+title: "MAF Metrics Dashboard - API Documentation"
+main: README.md
+exclude:
+  - vendor
+  - tmp
+  - log
+  - storage
+  - node_modules
+  - public
+  - bin
+  - db/migrate
+  - config
+  - spec
+  - test
+line_numbers: true
+show_hash: true
+all: true
+hyperlink_all: true
+charset: UTF-8
