@@ -11,7 +11,7 @@ Tarea técnica: Dashboard de Analítica en Tiempo Real
 
 ## Modelo de datos
 
-Se expandió el uso de solo `Metric` que representa una toma de información a `Sensor` que 
+Expandí el uso de solo `Metric` que representa una toma de información a `Sensor` que 
 es el agrupador y pertenece a un `Company`, para hacer separación entre varios posibles Tenants.
 `User` es parte de `Company` y tiene un nombre de usuario y contraseña, como también un `API_KEY` para acceder al endpoint de `API`.
 
@@ -21,15 +21,51 @@ Un ejemplo de prueba de la API es
 
 Los nombres de usuario y contraseña se encuentran en el archivo `seeds.rb`
 
+## Elección de Framework
 
+Elegí probar con Ruby on Rails 8 para apalancarme de las mejoras que ha traído, aunque
+conlleva un riesgo de utilizar una herramienta nueva. Desestimé reciclar un proyecto anterior
+para armar el proyecto por el inherente riesgo que exista un tema de configuración o librerías
+que termine bloqueando el desarrollo.
+
+Esta es la primera vez que uso la Solid trifecta, Solid Queues y Solid Cable, que hace que todo el procesamiento de eventos y tareas esté manejado por Rails y sobre SQLite, que le han
+sacado increíble performance, al punto de dejarlo production ready (mientras se considere el respaldo de los datos)
+
+Un tema interesante es el deploy con Kamal, que se hace de manera casi automática, compilando 
+el container y luego subiéndolo de inmediato a DigitalOcean.
+
+Hay un tema de configuración de dependencias que presenta problemas, esta vez usé importmap
+y hay flujos que se hacen un poco más complejos porque cuesta determinar la localidad de las
+librerías.
+
+Para la implementación de los gráficos use ApexCharts, que tiene una configuración mucho más simple de uso, los otros frameworks van requiriendo más configuración explícita que es difícil
+de analizar en desarrollo.
+
+Para la implementación del generador aleatorio use un ActiveJob que trabaja con múltiples hebras y va haciendo espera para ir registrando nuevos trabajos. Este código se ejecuta por varios minutos y el scheduler de rails lo vuelve a levantar en una siguiente oportunidad.
+
+Hice algunos tests con RSpec que es más simple de leer y generé comentarios sobre los métodos
+para tener rdoc actualizado. Disponible en `/docs` 
+
+Para tener el proyecto de manera local se debe
+
+  - Descargar el repositorio
+  - Tener rvm u otro gestor y tener Ruby 3.4 instalado
+  - Ejecutar `bundle`
+  - Tener node, y yarn para hacer `yarn`
+  - Crear la base de datos `rails db:create`, `rails db:migrate` o `rails db:schema:load`
+  - Generar el seed `rails db:seed`
+  - Para ejecutar el servidor `bin/dev`
+  - Para levantar la consola de rails `rails c`
 
 ### Objetivo general
 Diseña, implementa y deployed un dashboard de analítica con submenú y gráficos en tiempo real, respaldado por una base de datos a la que un cron inyecta información periódicamente. Tienes libertad total de lenguaje, framework y base de datos, pero debes usar una librería de componentes UI para la interfaz y dejar el proyecto corriendo públicamente.
 
 ### Requisitos funcionales
   -[X] UI con submenú y secciones: Overview, Real-Time, Historical, Settings.
-  -[X] Signin y Signup (Se puede usar un proveedor externo de autenticación)
-  -[] Al menos 2 gráficos en tiempo real (línea y barras) con actualización push (WebSocket/SSE).
+  -[X] Signin (Se puede usar un proveedor externo de autenticación)
+  -[ ] Signup no fue realizado, es un flujo más largo y lo desprioricé para llegar a otras funcionalidades.
+  -[X] Al menos 2 gráficos en tiempo real (línea y barras) con actualización push (WebSocket/SSE). 
+  -[] El gráfico de barras no está en tiempo real, el proceso de update de los datos consolidados es un poco más intensivo para el desarrollo en este minuto.
   -[X] Modelo de datos con tabla 'metrics' (id, source, metric, value, ts UTC).
   -[X] Proceso cron que inserta datos sintéticos cada 5–15s con posibilidad de picos.
   -[X] Endpoints REST para histórico 
