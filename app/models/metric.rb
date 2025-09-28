@@ -2,7 +2,7 @@ class Metric < ApplicationRecord
 
   belongs_to :sensor, foreign_key: 'source', primary_key: 'code'
 
-  after_create :broadcast_metric
+  after_create :schedule_broadcast_metric
 
   scope :descending, -> { order(created_at: :desc) }
   scope :recently_created, ->(horizon: 1, ordered: :asc) { where(created_at: horizon.hours.ago..).order(created_at: ordered) }
@@ -13,8 +13,12 @@ class Metric < ApplicationRecord
     { value:, name: }
   end
 
-  def broadcast_metric
+  def broadcast_metric!
     ActionCable.server.broadcast("metrics_#{source}", broadcasteable_attributes)
+  end
+
+  def schedule_broadcast_metric
+    BroadcastMetricJob.perform_later(metric_id: id)
   end
 
 end

@@ -8,12 +8,10 @@ export default class extends Controller {
     data: Object
   }
   initialize() {
-    console.log('Init')
     this.datasets = {}
     this.chart = null
   }
   connect() {
-    console.log('Data', this.dataValue)
     window.dataValue = this.dataValue
     this.datasets = Object.entries(this.dataValue).map(([sensor, points], idx) => ({
       name: sensor,
@@ -39,6 +37,7 @@ export default class extends Controller {
         width: "100%",
         type: "line",
         animations: {
+          enabled: false,
           initialAnimation: {
             enabled: false
           }

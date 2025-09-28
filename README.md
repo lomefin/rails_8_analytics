@@ -1,7 +1,5 @@
 # README
 
-
-
 ## Requirement
 
 Tarea técnica: Dashboard de Analítica en Tiempo Real
@@ -10,15 +8,15 @@ Tarea técnica: Dashboard de Analítica en Tiempo Real
 Diseña, implementa y deployed un dashboard de analítica con submenú y gráficos en tiempo real, respaldado por una base de datos a la que un cron inyecta información periódicamente. Tienes libertad total de lenguaje, framework y base de datos, pero debes usar una librería de componentes UI para la interfaz y dejar el proyecto corriendo públicamente.
 
 ### Requisitos funcionales
-• UI con submenú y secciones: Overview, Real-Time, Historical, Settings.
-• Signin y Signup (Se puede usar un proveedor externo de autenticación)
-• Al menos 2 gráficos en tiempo real (línea y barras) con actualización push (WebSocket/SSE).
-• Modelo de datos con tabla 'metrics' (id, source, metric, value, ts UTC).
-• Proceso cron que inserta datos sintéticos cada 5–15s con posibilidad de picos.
-• Endpoints REST para histórico y stream en tiempo real (SSE/WS).
-• Filtros por rango de fechas, métricas y fuentes.
-• Deploy en entorno público con cron activo.
-• Calidad de código: linter, manejo de errores, pruebas mínimas.
+  -[X] UI con submenú y secciones: Overview, Real-Time, Historical, Settings.
+  -[X] Signin y Signup (Se puede usar un proveedor externo de autenticación)
+  -[] Al menos 2 gráficos en tiempo real (línea y barras) con actualización push (WebSocket/SSE).
+  -[X] Modelo de datos con tabla 'metrics' (id, source, metric, value, ts UTC).
+  -[X] Proceso cron que inserta datos sintéticos cada 5–15s con posibilidad de picos.
+  -[] Endpoints REST para histórico y stream en tiempo real (SSE/WS).
+  -[] Filtros por rango de fechas, métricas y fuentes.
+  -[] Deploy en entorno público con cron activo.
+  -[X] Calidad de código: linter, manejo de errores, pruebas mínimas.
 
 ### Entregables
 
