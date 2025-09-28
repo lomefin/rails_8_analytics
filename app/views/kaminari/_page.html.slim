@@ -1,0 +1,5 @@
+li.page-item class=('active' if page.current?)
+  - if page.current?
+    span.page-link aria-current="page" = page
+  - else
+    = link_to page, url, rel: ('next' if page.next?), remote: local_assigns[:remote], class: 'page-link'
