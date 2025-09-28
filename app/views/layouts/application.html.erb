@@ -25,13 +25,19 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
     <%= javascript_importmap_tags %>
     <script type="module">
+      import chartJs from 'https://cdn.jsdelivr.net/npm/chart.js@4.5.0/+esm'
+      console.log(chartJs)
+      console.log(chartJs.Chart)
+      import "channels"
+      // import "@hotwired/turbo-rails"
+      //import "controllers"
       
-      import LocalTime from "local-time"
-      window.localtime = LocalTime
-      LocalTime.start()
-      document.addEventListener("turbo:morph", () => {
-        LocalTime.run()
-      })
+      // import LocalTime from "local-time"
+      // window.localtime = LocalTime
+      // LocalTime.start()
+      // document.addEventListener("turbo:morph", () => {
+      //   LocalTime.run()
+      // })
     </script>
   </head>
 

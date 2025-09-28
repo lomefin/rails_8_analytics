@@ -17,7 +17,7 @@ class MetricsController < ApplicationController
 
   def load_previous_data
     all_metrics = current_company.metrics.recently_created
-    @dimensions = all_metrics.distinct(:name).pluck(:name)
+    @dimensions = current_company.metrics.distinct(:name).pluck(:name)
     @data = @dimensions.to_h do |dim|
       metrics_of_dim = all_metrics.where(name: dim)
       sources = all_metrics.distinct(:source).pluck(:source)

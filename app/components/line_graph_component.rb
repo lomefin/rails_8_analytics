@@ -11,6 +11,6 @@ class LineGraphComponent < ViewComponent::Base
 
   def title = @title.titleize
 
-
+  def values = @values.to_json
 
 end

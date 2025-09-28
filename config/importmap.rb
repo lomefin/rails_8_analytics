@@ -10,3 +10,5 @@ pin "local-time" # @3.0.3
 pin "@rails/actioncable", to: "actioncable.esm.js"
 
 pin_all_from "app/javascript/channels", under: "channels"
+# pin "chart.js" # @4.5.0
+# pin "@kurkle/color", to: "@kurkle--color.js" # @0.3.4

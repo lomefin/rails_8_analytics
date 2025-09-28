@@ -2,7 +2,7 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 
-import "./channels"
+//import "./channels"
 
 import LocalTime from "local-time"
 console.log('application')
@@ -11,4 +11,5 @@ document.addEventListener("turbo:morph", () => {
   LocalTime.run()
 })
 
+//import Chart from "chart.js/auto"
 // import * as bootstrap from "bootstrap"
