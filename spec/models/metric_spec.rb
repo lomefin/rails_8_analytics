@@ -69,15 +69,14 @@ RSpec.describe Metric, type: :model do
     let(:sensor) { create(:sensor, code: 'BROADCAST001') }
 
     it 'broadcasts after creation' do
-      expect(ActionCable.server).to receive(:broadcast)
-        .with("metrics_#{sensor.code}", { value: 42.5, name: 'pressure' })
+      expect(BroadcastMetricJob).to receive(:perform_later)
 
       create(:metric, source: sensor.code, name: 'pressure', value: 42.5)
     end
 
     it 'includes correct broadcasteable attributes' do
-      metric = build(:metric, source: sensor.code, name: 'rpm', value: 1200)
-      expected_attributes = { value: 1200, name: 'rpm' }
+      metric = create(:metric, source: sensor.code, name: 'rpm', value: 1200)
+      expected_attributes = { value: 1200.to_i, name: 'rpm', ts: metric.created_at.iso8601 }
 
       expect(metric.broadcasteable_attributes).to eq(expected_attributes)
     end
