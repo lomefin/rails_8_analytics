@@ -1,8 +1,13 @@
 # README
 
+
 ## Requirement
 
 Tarea técnica: Dashboard de Analítica en Tiempo Real
+
+[Video en Loom](https://www.loom.com/share/0ee430bb855a48889c598b8d26bd46a2?sid=cd521c05-a42c-499e-9fcb-1471785349b1)
+
+[Link a aplicativo en vivo](https://maf.avispa.work/)
 
 ### Objetivo general
 Diseña, implementa y deployed un dashboard de analítica con submenú y gráficos en tiempo real, respaldado por una base de datos a la que un cron inyecta información periódicamente. Tienes libertad total de lenguaje, framework y base de datos, pero debes usar una librería de componentes UI para la interfaz y dejar el proyecto corriendo públicamente.
