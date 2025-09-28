@@ -9,6 +9,10 @@ Tarea técnica: Dashboard de Analítica en Tiempo Real
 
 [Link a aplicativo en vivo](https://maf.avispa.work/)
 
+Screenshot del generador de métricas aleatorias
+<img width="1327" height="676" alt="image" src="https://github.com/user-attachments/assets/6cd42a76-d5b7-46c3-b853-eb6f1751fb64" />
+
+
 ## Modelo de datos
 
 Expandí el uso de solo `Metric` que representa una toma de información a `Sensor` que 
@@ -41,7 +45,8 @@ librerías.
 Para la implementación de los gráficos use ApexCharts, que tiene una configuración mucho más simple de uso, los otros frameworks van requiriendo más configuración explícita que es difícil
 de analizar en desarrollo.
 
-Para la implementación del generador aleatorio use un ActiveJob que trabaja con múltiples hebras y va haciendo espera para ir registrando nuevos trabajos. Este código se ejecuta por varios minutos y el scheduler de rails lo vuelve a levantar en una siguiente oportunidad.
+Para la implementación del generador aleatorio use un ActiveJob que trabaja con múltiples hebras y va haciendo espera para ir registrando nuevos trabajos. Este código se ejecuta por varios minutos y el scheduler de rails lo vuelve a levantar en una siguiente oportunidad. En el seed también se usa el generador, pero en vez de esperas, simula los próximos eventos y cambia la fecha de creación de los objetos. Tiene dos ritmos de trabajo que tienen distintas distribuciones respecto al próximo evento. El generador suele estar en modo lento, pero hay una chance que pase al modo rápido, en donde dispara múltiples eventos seguidos, también bajo una distribución normal. Eventualmente se hace nuevamente el cambio al modo lento.
+
 
 Hice algunos tests con RSpec que es más simple de leer y generé comentarios sobre los métodos
 para tener rdoc actualizado. Disponible en `/docs` 
