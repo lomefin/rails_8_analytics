@@ -31,9 +31,23 @@ RSpec.describe Sensor, type: :model do
     it 'maintains metrics_count accurately' do
       expect(sensor.metrics_count).to eq(0)
 
-      create(:metric, source: sensor.code)
+      # Create first metric
+      metric1 = create(:metric, source: sensor.code)
       sensor.reload
+      expect(sensor.metrics_count).to eq(1)
 
+      # Create second metric
+      metric2 = create(:metric, source: sensor.code, name: 'rpm')
+      sensor.reload
+      expect(sensor.metrics_count).to eq(2)
+
+      # Verify actual count matches cached count
+      expect(sensor.metrics.count).to eq(2)
+
+      # Delete one metric - counter should decrement
+      metric1.destroy
+      sensor.reload
+      expect(sensor.metrics_count).to eq(1)
       expect(sensor.metrics.count).to eq(1)
     end
   end

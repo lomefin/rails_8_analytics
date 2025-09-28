@@ -19,7 +19,7 @@
 # @version 1.0
 class Metric < ApplicationRecord
 
-  belongs_to :sensor, foreign_key: 'source', primary_key: 'code'
+  belongs_to :sensor, foreign_key: 'source', primary_key: 'code', counter_cache: :metrics_count
 
   after_create :schedule_broadcast_metric
 
