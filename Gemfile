@@ -62,6 +62,7 @@ group :development do
   gem "web-console"
   gem "lookbook", ">= 2.3.13"
   gem "rubocop-daemon"
+  gem "dotenv-rails"
 end
 
 group :test do
