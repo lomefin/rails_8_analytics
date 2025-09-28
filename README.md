@@ -11,6 +11,8 @@ Tarea técnica: Dashboard de Analítica en Tiempo Real
 
 Screenshot del generador de métricas aleatorias
 <img width="1327" height="676" alt="image" src="https://github.com/user-attachments/assets/6cd42a76-d5b7-46c3-b853-eb6f1751fb64" />
+<img width="1327" height="676" alt="image" src="https://github.com/user-attachments/assets/105d18cc-5563-42c4-b1ed-6380b877beba" />
+
 
 
 ## Modelo de datos
